@@ -1,8 +1,8 @@
-# PRM800K: 一个过程监督数据集
+# PRM800K: A Process Supervision Dataset
 
 #### [[Blog Post]](https://openai.com/research/improving-mathematical-reasoning-with-process-supervision) [[Paper]](https://arxiv.org/abs/2305.20050)
 
-本资源库随论文[Let&#39;s Verify Step by Step](https://arxiv.org/abs/2305.20050)一起发布，并介绍了其中引入的 PRM800K 数据集。PRM800K 是一个过程监督数据集，包含 [MATH](https://github.com/hendrycks/math)数据集中由模型生成的问题解决方案的 800,000 个步骤级正确性标签。有关 PRM800K 和该项目的更多信息，请参阅论文。
+This repository accompanies the paper [Let's Verify Step by Step](https://arxiv.org/abs/2305.20050) and presents the PRM800K dataset introduced there. PRM800K is a process supervision dataset containing 800,000 step-level correctness labels for model-generated solutions to problems from the [MATH](https://github.com/hendrycks/math) dataset. More information on PRM800K and the project can be found in the paper.
 
 We are releasing the raw labels as well as the instructions we gave labelers during phase 1 and phase 2 of the project. Example labels can be seen in the image below.
 
@@ -10,11 +10,13 @@ We are releasing the raw labels as well as the instructions we gave labelers dur
     <img src="prm800k/img/interface.png" height="300"/>
 </p>
 
+
 ## Data
 
 The `data/` folder contains our labels formatted as newline-delimited lists of `json` data. The data has been uploaded with [Git LFS](https://git-lfs.com/), which you'll need to install in order to properly clone the repository.
 
 Each line represents 1 full solution sample and can contain many step-level labels. Here is one annotated line:
+
 
 ```javascript
 {
@@ -173,10 +175,12 @@ Each line represents 1 full solution sample and can contain many step-level labe
 }
 ```
 
+
 ## Instructions
 
 The `instructions/` folder contains the instructions documents we gave to
 labelers during each phase of the project.
+
 
 ## Answer Grading
 
@@ -189,6 +193,7 @@ Answer grading is difficult in general. This grading logic is designed to be con
 answers, though it does so less frequently than the normalization logic from MATH. Our logic might sometimes admit incorrect
 answers, though we've put effort into minimizing this.
 
+
 ## MATH Splits
 
 As explained in Let's Verify Step by Step, we use a nonstandard MATH train/test split.
@@ -197,9 +202,10 @@ As explained in Let's Verify Step by Step, we use a nonstandard MATH train/test 
 
 The `math_splits/` folder contains our selected splits in the `train.jsonl` and `test.jsonl` files. You'll need [Git LFS](https://git-lfs.com/) to properly clone these files.
 
+
 ## Scored Samples
 
-We release all large-scale model samples used to evaluate the large-scale ORM and PRM, corresponding to Figure 3 in the paper. Each test problem has to 1860 scored samples. Solutions that failed to reach an answer within 1024 tokens were discarded, resulting in less than 1860 samples on some problems. We account for this in the best-of-N evaluation logic.
+We release all large-scale model samples used to evaluate the large-scale ORM and PRM, corresponding to Figure 3 in the paper. Each test problem has to 1860 scored samples. Solutions that failed to reach an answer within 1024 tokens were discarded, resulting in less than 1860 samples on some problems. We account for this in the best-of-N evaluation logic. 
 
 Evaluate the PRM:
 
@@ -212,6 +218,7 @@ Evaluate the ORM:
 ```bash
 python eval/eval.py --method orm
 ```
+
 
 ## Citation
 
