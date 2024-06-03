@@ -10,11 +10,11 @@ We are releasing the raw labels as well as the instructions we gave labelers dur
     <img src="prm800k/img/interface.png" height="300"/>
 </p>
 
-## Data
+## 数据
 
-The `data/` folder contains our labels formatted as newline-delimited lists of `json` data. The data has been uploaded with [Git LFS](https://git-lfs.com/), which you'll need to install in order to properly clone the repository.
+ `data/` 文件夹包含我们的标签，格式为新行分隔的 "json "数据列表。这些数据是通过 [Git LFS](https://git-lfs.com/) 上传的，你需要安装它才能正确克隆版本库。
 
-Each line represents 1 full solution sample and can contain many step-level labels. Here is one annotated line:
+每一行代表一个完整的解决方案样本，可以包含许多步骤级标签。下面是一行注释：
 
 ```javascript
 {
@@ -173,49 +173,45 @@ Each line represents 1 full solution sample and can contain many step-level labe
 }
 ```
 
-## Instructions
+## 说明
 
-The `instructions/` folder contains the instructions documents we gave to
-labelers during each phase of the project.
+ `instructions/`文件夹包含我们在项目每个阶段给贴标人员的说明文件。
+在项目每个阶段给贴标人员的说明文件。
 
-## Answer Grading
+## 答案评分
 
-The `grading/` folder contains the python grading logic we used for determining if a model-outputted answer correctly matched
-the ground truth answer in Hendrycks' MATH dataset. We build off of Hendrycks' math normalization logic in `math_normalize.py`
-and use sympy to check for equality of expressions in `grader.py`. We recommend using `grader.grade_answer(model_answer, gt_answer)`
-where both answers are strings to determine if a solution is correct or not.
+`grading/` 文件夹包含了我们用来判断模型输出的答案是否与 Hendrycks 的数学数据集中的真实答案正确匹配的 python 分级逻辑。我们借鉴了 Hendrycks 在 `math_normalize.py` 中的数学归一化逻辑，并在 `grader.py` 中使用 sympy 检查表达式是否相等。我们推荐使用 `grader.grade_answer(model_answer, gt_answer)`
+来判断解决方案是否正确。
 
-Answer grading is difficult in general. This grading logic is designed to be conservative and will sometimes reject correct
-answers, though it does so less frequently than the normalization logic from MATH. Our logic might sometimes admit incorrect
-answers, though we've put effort into minimizing this.
+一般来说，答案分级比较困难。这种分级逻辑的设计是保守的，有时会拒绝正确答案，但这种情况比 MATH 的规范化逻辑要少。我们的逻辑有时可能会接受不正确的答案，不过我们已经努力将这种情况降到最低。
 
 ## MATH Splits
 
-As explained in Let's Verify Step by Step, we use a nonstandard MATH train/test split.
+正如 Let's Verify Step by Step, 一文中所述，我们使用了非标准的 MATH 训练/测试分割。
 
-> In order to avoid the risk of over-fitting on the 7,500 MATH training problems, we expanded the training set to include 4,500 MATH test split problems. We therefore evaluate our models only on the remaining 500 held-out problems. We selected these 500 test problems uniformly at random, and we believe they are representative of the test set as a whole.
+> 为了避免在 7500 个 MATH 训练问题上过度拟合的风险，我们将训练集扩展到了 4500 个 MATH 测试问题。因此，我们只在剩余的 500 个被排除的问题上评估我们的模型。我们随机均匀地选择了这 500 个测试问题，我们相信它们能够代表整个测试集。
 
-The `math_splits/` folder contains our selected splits in the `train.jsonl` and `test.jsonl` files. You'll need [Git LFS](https://git-lfs.com/) to properly clone these files.
+math_splits/` 文件夹包含我们在 `train.jsonl` 和 `test.jsonl` 文件中选择的拆分问题。你需要 [Git LFS](https://git-lfs.com/) 来克隆这些文件。
 
-## Scored Samples
+## 得分样本
 
-We release all large-scale model samples used to evaluate the large-scale ORM and PRM, corresponding to Figure 3 in the paper. Each test problem has to 1860 scored samples. Solutions that failed to reach an answer within 1024 tokens were discarded, resulting in less than 1860 samples on some problems. We account for this in the best-of-N evaluation logic.
+我们发布了用于评估大规模 ORM 和 PRM 的所有大规模模型样本，与论文中的图 3 相对应。每个测试问题都有 1860 个得分样本。未能在 1024 个标记内得出答案的解决方案会被丢弃，这导致某些问题的样本少于 1860 个。我们在 "Best-of-N "评估逻辑中考虑到了这一点。
 
-Evaluate the PRM:
+评估 PRM：
 
 ```bash
 python eval/eval.py --method prm
 ```
 
-Evaluate the ORM:
+评估 ORM:
 
 ```bash
 python eval/eval.py --method orm
 ```
 
-## Citation
+## 引用
 
-Please use the below BibTeX entry to cite this dataset:
+请使用以下 BibTeX 条目引用该数据集：
 
 ```
 @article{lightman2023lets,
