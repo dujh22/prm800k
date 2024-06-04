@@ -81,11 +81,7 @@ We are releasing the raw labels as well as the instructions we gave labelers dur
     "steps": [
       // Each object here represents labels for one step of the solution.
       {
-        // Each step will contain one or more completions. These are candidate
-        // steps the model output at this step of the trajectory. In phase 1,
-        // we frequently collect labels on alternative steps, while in phase 2
-        // we only collect labels on alternative steps after the first mistake,
-        // so most completions lists are singletons.
+        // 每个步骤将包含一个或多个完成项。这些是模型在轨迹的这一步输出的候选步骤。在第一阶段，我们经常收集候选步骤的标签，而在第二阶段，我们只收集第一次错误之后的候选步骤的标签，因此大多数补全列表都是单子。
         "completions": [
           {
             // Text of the step.
@@ -191,7 +187,7 @@ We are releasing the raw labels as well as the instructions we gave labelers dur
 
 > 为了避免在 7500 个 MATH 训练问题上过度拟合的风险，我们将训练集扩展到了 4500 个 MATH 测试问题。因此，我们只在剩余的 500 个被排除的问题上评估我们的模型。我们随机均匀地选择了这 500 个测试问题，我们相信它们能够代表整个测试集。
 
-math_splits/` 文件夹包含我们在 `train.jsonl` 和 `test.jsonl` 文件中选择的拆分问题。你需要 [Git LFS](https://git-lfs.com/) 来克隆这些文件。
+math_splits/`文件夹包含我们在`train.jsonl `和`test.jsonl` 文件中选择的拆分问题。你需要 [Git LFS](https://git-lfs.com/) 来克隆这些文件。
 
 ## 得分样本
 
